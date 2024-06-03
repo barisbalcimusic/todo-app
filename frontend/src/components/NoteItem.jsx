@@ -1,8 +1,13 @@
+import { useState } from "react";
 import DeleteNote from "./DeleteNote";
 import UpdateNote from "./UpdateNote";
 
 const NoteItem = ({ id, title, content }) => {
-  const handleSubmit = () => {
+  const [editMode, setEditMode] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEditMode(false);
     const fetchData = async () => {
       try {
         const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
@@ -28,10 +33,32 @@ const NoteItem = ({ id, title, content }) => {
   return (
     <li>
       <form onSubmit={handleSubmit}>
-        <input type="text" defaultValue={title} />
-        <input type="text" defaultValue={content} />
+        <input
+          disabled={!editMode}
+          className={
+            editMode ? "border-solid border-2 border-black-500 p-2" : "re p-2"
+          }
+          type="text"
+          defaultValue={title}
+        />
+        <input
+          disabled={!editMode}
+          className={
+            editMode
+              ? "border-solid border-2 border-black-500 p-2"
+              : "disabled:bg-white p-2"
+          }
+          type="text"
+          defaultValue={content}
+        />
         <DeleteNote id={id} />
-        <UpdateNote id={id} title={title} content={content} />
+        <UpdateNote
+          id={id}
+          title={title}
+          content={content}
+          editMode={editMode}
+          setEditMode={setEditMode}
+        />
       </form>
     </li>
   );

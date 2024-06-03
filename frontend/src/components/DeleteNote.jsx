@@ -19,7 +19,11 @@ const DeleteNote = ({ id }) => {
     fetchData();
   };
 
-  return <button onClick={handleDelete}>delete</button>;
+  return (
+    <button className="bg-purple-300 p-2" onClick={handleDelete}>
+      delete
+    </button>
+  );
 };
 
 export default DeleteNote;
