@@ -1,59 +1,32 @@
-import express from "express";
-import cors from "cors";
+import { useEffect, useState } from "react";
+import NoteList from "./components/NoteList";
+import AddNote from "./components/AddNote";
+import NotesContextProvider from "./contexts/NotesContext";
 
-const app = express();
+const App = () => {
+  const [notes, setNotes] = useState([]);
 
-//GLOBAL MIDDLEWARES
-app.use(cors());
-app.use(express.json());
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/notes");
+        const data = await res.json();
+        setNotes(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
-const port = 3000;
+  return (
+    <NotesContextProvider>
+      <div className="container">
+        <AddNote setNotes={setNotes} />
+        <NoteList notes={notes} setNotes={setNotes} />
+      </div>
+    </NotesContextProvider>
+  );
+};
 
-let db = [];
-
-//ROUTERS
-app.get("/api/notes", (req, res) => {
-  res.json(db);
-});
-
-app.post("/api/notes", (req, res) => {
-  try {
-    const post = req.body;
-    db.push(post);
-    res.json(db);
-  } catch (error) {
-    res.json({ message: error.message });
-  }
-});
-
-app.patch("/api/notes/:id", (req, res) => {
-  try {
-    const id = req.params.id;
-    const title = req.body.title;
-    const content = req.body.content;
-    const filteredNote = db.find((note) => Number(note.id) === Number(id));
-    if (!filteredNote) {
-      return res.json("note not found");
-    }
-    if (title !== undefined) filteredNote.title = title;
-    if (content !== undefined) filteredNote.content = content;
-    res.json(db);
-  } catch (error) {
-    res.json({ message: error.message });
-  }
-});
-
-app.delete("/api/notes/:id", (req, res) => {
-  try {
-    const id = req.params.id;
-    db = db.filter((note) => Number(note.id) !== Number(id));
-    res.json(db);
-  } catch (error) {
-    res.json({ message: error.message });
-  }
-});
-
-//SERVER
-app.listen(port, () => {
-  console.log("Server listening on port", port);
-});
+export default App;
