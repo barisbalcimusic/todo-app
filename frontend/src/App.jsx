@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-purple-100">
       <AddNote />
       <NoteList />
     </div>

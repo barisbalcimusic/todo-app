@@ -32,33 +32,35 @@ const NoteItem = ({ id, title, content }) => {
 
   return (
     <li>
-      <form onSubmit={handleSubmit}>
-        <input
-          disabled={!editMode}
-          className={
-            editMode ? "border-solid border-2 border-black-500 p-2" : "re p-2"
-          }
-          type="text"
-          defaultValue={title}
-        />
-        <input
-          disabled={!editMode}
-          className={
-            editMode
-              ? "border-solid border-2 border-black-500 p-2"
-              : "disabled:bg-white p-2"
-          }
-          type="text"
-          defaultValue={content}
-        />
-        <DeleteNote id={id} />
-        <UpdateNote
-          id={id}
-          title={title}
-          content={content}
-          editMode={editMode}
-          setEditMode={setEditMode}
-        />
+      <form className="p-2 flex items-center gap-5" onSubmit={handleSubmit}>
+        <div className="flex flex-col">
+          <input
+            disabled={!editMode}
+            className={`p-2 font-bold  ${
+              editMode ? "border-solid border-2 border-black-500" : ""
+            }`}
+            type="text"
+            defaultValue={title}
+          />
+          <input
+            disabled={!editMode}
+            className={`p-2 ${
+              editMode ? "border-solid border-2 border-black-500" : ""
+            }`}
+            type="text"
+            defaultValue={content}
+          />
+        </div>
+        <div className="flex gap-2">
+          <DeleteNote id={id} />
+          <UpdateNote
+            id={id}
+            title={title}
+            content={content}
+            editMode={editMode}
+            setEditMode={setEditMode}
+          />
+        </div>
       </form>
     </li>
   );
