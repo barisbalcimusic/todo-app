@@ -4,7 +4,7 @@ import AddNote from "./components/AddNote";
 import { useNotesContext } from "./contexts/NotesContext";
 
 const App = () => {
-  const { notes, setNotes } = useNotesContext();
+  const { setNotes } = useNotesContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <AddNote setNotes={setNotes} />
+      <AddNote />
       <NoteList />
     </div>
   );
