@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NoteList from "./components/NoteList";
 import AddNote from "./components/AddNote";
-import NotesContextProvider from "./contexts/NotesContext";
+import { useNotesContext } from "./contexts/NotesContext";
 
 const App = () => {
-  const [notes, setNotes] = useState([]);
+  const { notes, setNotes } = useNotesContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,12 +20,10 @@ const App = () => {
   }, []);
 
   return (
-    <NotesContextProvider>
-      <div className="container">
-        <AddNote setNotes={setNotes} />
-        <NoteList notes={notes} setNotes={setNotes} />
-      </div>
-    </NotesContextProvider>
+    <div className="container">
+      <AddNote setNotes={setNotes} />
+      <NoteList />
+    </div>
   );
 };
 
