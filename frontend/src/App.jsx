@@ -12,7 +12,7 @@ const App = () => {
       try {
         const res = await fetch("http://localhost:3000/api/notes");
         const data = await res.json();
-        setNotes(data);
+        setNotes(data.reverse());
       } catch (error) {
         console.log(error);
       }
@@ -21,7 +21,8 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-purple-100">
+    <div className="w-screen min-h-screen p-5 bg-purple-100 flex flex-col items-center gap-5">
+      <h1 className="text-4xl font-bold">ToDoApp</h1>
       <AddNote />
       <NoteList />
     </div>

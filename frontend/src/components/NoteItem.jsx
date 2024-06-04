@@ -26,8 +26,7 @@ const NoteItem = ({ id, title, content }) => {
           }),
         });
         const data = await res.json();
-        console.log(data);
-        setNotes(data);
+        setNotes(data.reverse());
       } catch (error) {
         console.log(error);
       }
@@ -36,29 +35,32 @@ const NoteItem = ({ id, title, content }) => {
   };
 
   return (
-    <li>
-      <form className="p-2 flex items-center gap-5" onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <input
-            value={titleValue}
-            onChange={(e) => setTitle(e.target.value)}
-            className={`p-2 font-bold  ${
-              editMode ? "border-solid border-2 border-black-500" : ""
-            }`}
-            type="text"
-            disabled={!editMode}
-          />
-          <input
-            value={contentValue}
-            onChange={(e) => setContent(e.target.value)}
-            disabled={!editMode}
-            className={`p-2 ${
-              editMode ? "border-solid border-2 border-black-500" : ""
-            }`}
-            type="text"
-          />
-        </div>
-        <div className="flex gap-2">
+    <li className="w-full flex justify-center rounded-xl px-10 py-5  shadow-lg bg-blue-100">
+      <form
+        className="w-9/12 min-w-[270px] flex flex-col gap-2"
+        onSubmit={handleSubmit}
+      >
+        <input
+          value={titleValue}
+          onChange={(e) => setTitle(e.target.value)}
+          className={`w-full text-xl p-1 font-bold ${
+            editMode ? "bg-white" : "bg-sky-200"
+          }`}
+          type="text"
+          disabled={!editMode}
+          maxLength="30"
+        />
+        <input
+          value={contentValue}
+          onChange={(e) => setContent(e.target.value)}
+          className={`w-full p-1 bg-purple-200 ${
+            editMode ? "bg-white" : "bg-sky-200"
+          }`}
+          type="text"
+          disabled={!editMode}
+          maxLength="30"
+        />
+        <div className="flex gap-1">
           <DeleteNote id={id} />
           <UpdateNote
             id={id}

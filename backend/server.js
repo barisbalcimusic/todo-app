@@ -9,13 +9,7 @@ app.use(express.json());
 
 const port = 3000;
 
-let db = [
-  {
-    id: 1,
-    title: "Meeting Notes",
-    content: "Discuss project milestones and deadlines.",
-  },
-];
+let db = [];
 
 //ROUTERS
 app.get("/api/notes", (req, res) => {
@@ -38,9 +32,6 @@ app.patch("/api/notes/:id", (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
     const filteredNote = db.find((note) => Number(note.id) === Number(id));
-    if (!filteredNote) {
-      return res.json("note not found");
-    }
     if (title !== undefined) filteredNote.title = title;
     if (content !== undefined) filteredNote.content = content;
     res.json(db);

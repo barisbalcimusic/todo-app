@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNotesContext } from "../contexts/NotesContext";
 
 const DeleteNote = ({ id }) => {
@@ -11,7 +13,7 @@ const DeleteNote = ({ id }) => {
           method: "DELETE",
         });
         const data = await res.json();
-        setNotes(data);
+        setNotes(data.reverse());
       } catch (error) {
         console.log(error);
       }
@@ -20,8 +22,11 @@ const DeleteNote = ({ id }) => {
   };
 
   return (
-    <button className="bg-purple-300 p-2" onClick={handleDelete}>
-      delete
+    <button
+      className="bg-purple-300 w-8 h-8 font-bold hover:bg-red-200"
+      onClick={handleDelete}
+    >
+      <FontAwesomeIcon icon={faTrash} />
     </button>
   );
 };
