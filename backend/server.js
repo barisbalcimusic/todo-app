@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import notesRouter from "./routers/notesRouter";
+import { notesRouter } from "./routers/notesRouter.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -9,10 +10,11 @@ app.use(express.json());
 
 const port = 3000;
 
-let db = [];
-
 //ROUTES
 app.use("/api/notes", notesRouter);
+
+//ERROR HANDLER
+app.use(errorHandler);
 
 //SERVER
 app.listen(port, () => {

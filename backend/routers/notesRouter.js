@@ -4,9 +4,9 @@ import {
   createNote,
   updateNote,
   deleteNote,
-} from "../controllers/notesController";
+} from "../controllers/notesController.js";
 
-const notesRouter = Router();
+export const notesRouter = Router();
 
 notesRouter.route("/").get(getAllNotes).post(createNote);
 notesRouter.route("/:id").patch(updateNote).delete(deleteNote);
