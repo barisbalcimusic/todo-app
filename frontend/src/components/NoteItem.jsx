@@ -14,17 +14,20 @@ const NoteItem = ({ id, title, content }) => {
     setEditMode(false);
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: id,
-            title: titleValue,
-            content: contentValue,
-          }),
-        });
+        const res = await fetch(
+          `https://todoapp-1-4n5p.onrender.com/api/notes/${id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: id,
+              title: titleValue,
+              content: contentValue,
+            }),
+          }
+        );
         const data = await res.json();
         setNotes(data.reverse());
       } catch (error) {
