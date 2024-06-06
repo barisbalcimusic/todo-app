@@ -1,4 +1,3 @@
-import { log } from "console";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -23,7 +22,6 @@ export const createNote = (req, res, next) => {
     db.push(post);
     fs.writeFileSync(dbPath, JSON.stringify(db), "utf8");
     res.json(db);
-    console.log(db);
   } catch (e) {
     next(e);
   }
