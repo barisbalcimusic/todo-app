@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div className="w-screen min-h-screen p-5 bg-purple-100 flex flex-col items-center gap-5">
-      <h1 className="text-4xl font-bold">ToDoApp</h1>
+      <h1 className="text-4xl font-bold">BetterDo</h1>
       <AddNote />
       <NoteList />
     </div>
