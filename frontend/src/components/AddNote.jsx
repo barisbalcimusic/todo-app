@@ -13,20 +13,17 @@ const AddNote = () => {
     if (submitted) {
       const fetchData = async () => {
         try {
-          const res = await fetch(
-            "https://todoapp-1-4n5p.onrender.com/api/notes",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: new Date().getTime(),
-                title: title,
-                content: content,
-              }),
-            }
-          );
+          const res = await fetch("https://betterdo.onrender.com/api/notes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: new Date().getTime(),
+              title: title,
+              content: content,
+            }),
+          });
           const data = await res.json();
           setNotes(data.reverse());
         } catch (error) {

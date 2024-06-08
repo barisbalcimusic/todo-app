@@ -10,9 +10,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          "https://todoapp-1-4n5p.onrender.com/api/notes"
-        );
+        const res = await fetch("https://betterdo.onrender.com/api/notes");
         const data = await res.json();
         setNotes(data.reverse());
       } catch (error) {
