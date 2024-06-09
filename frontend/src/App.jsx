@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import NoteList from "./components/NoteList";
 import AddNote from "./components/AddNote";
 import { useNotesContext } from "./contexts/NotesContext";
+import { ClipLoader } from "react-spinners";
 
 const App = () => {
-  const { setNotes } = useNotesContext();
+  const { notes, setNotes } = useNotesContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +25,14 @@ const App = () => {
     <div className="w-screen min-h-screen p-5 bg-purple-100 flex flex-col items-center gap-5">
       <h1 className="text-4xl font-bold">BetterDo</h1>
       <AddNote />
-      <NoteList />
+      {notes.length !== 0 ? (
+        <NoteList />
+      ) : (
+        <div>
+          <ClipLoader color="green" size={80} />
+          <p className="text-xl">Loading...</p>
+        </div>
+      )}
     </div>
   );
 };
