@@ -1,59 +1,39 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { Notes } from "../models/notesModel.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dbPath = path.join(__dirname, "../db/db.json");
-
-let db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
-
-export const getAllNotes = (req, res, next) => {
+export const getAllNotes = async (req, res, next) => {
   try {
-    res.json(db);
+    const notes = await Notes.find();
+    res.status(200).json(notes);
   } catch (e) {
     next(e);
   }
 };
 
-export const createNote = (req, res, next) => {
+export const createNote = async (req, res, next) => {
   try {
-    const post = { id: new Date().getTime(), ...req.body };
-    db.push(post);
-    fs.writeFileSync(dbPath, JSON.stringify(db), "utf8");
-    res.json(db);
+    const note = await Notes.create(req.body);
+    res.status(201).json(note);
   } catch (e) {
     next(e);
   }
 };
 
-export const updateNote = (req, res, next) => {
+export const updateNote = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    if (db.find((note) => Number(note.id) === Number(id))) {
-      const { title, content } = req.body;
-      const filteredNote = db.find((note) => Number(note.id) === Number(id));
-      Object.assign(filteredNote, { title, content });
-      fs.writeFileSync(dbPath, JSON.stringify(db), "utf8");
-      res.json(db);
-    } else {
-      res.status(404).json({ message: "Note not found" });
-    }
+    const note = await Notes.findByIdAndUpdate(req.params.id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    res.status(200).json(note);
   } catch (e) {
     next(e);
   }
 };
 
-export const deleteNote = (req, res, next) => {
+export const deleteNote = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    if (db.find((note) => Number(note.id) === Number(id))) {
-      db = db.filter((note) => Number(note.id) !== Number(id));
-      fs.writeFileSync(dbPath, JSON.stringify(db), "utf8");
-      res.json(db);
-    } else {
-      res.status(404).json({ message: "Note not found" });
-    }
+    const note = await Notes.findByIdAndDelete(req.params.id, req.body);
+    res.status(200).json(note);
   } catch (e) {
     next(e);
   }

@@ -9,4 +9,4 @@ import {
 export const notesRouter = Router();
 
 notesRouter.route("/").get(getAllNotes).post(createNote);
-notesRouter.route("/:id").patch(updateNote).delete(deleteNote);
+notesRouter.route("/:id").put(updateNote).delete(deleteNote);

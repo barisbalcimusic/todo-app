@@ -3,14 +3,22 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { notesRouter } from "./routers/notesRouter.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { connectToDb } from "./config/database.js";
 
 const app = express();
 
+app.use(express.json());
+app.use(cors());
+dotenv.config();
+
+const port = process.env.PORT;
+const url = process.env.DB_URL;
+
+//CORS ip settings
 const allowedOrigins = [
-  "http://localhost:5174",
+  "http://localhost:5173",
   "https://betterdo.onrender.com/api/notes",
 ];
-
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -25,20 +33,25 @@ app.use(
   })
 );
 
-dotenv.config();
-
-app.use(cors());
-app.use(express.json());
-
-const port = process.env.PORT;
-
 //ROUTES
 app.use("/api/notes", notesRouter);
 
 //ERROR HANDLER
 app.use(errorHandler);
 
-//SERVER
-app.listen(port, () => {
-  console.log("Server listening on port", port);
-});
+const startServer = async () => {
+  try {
+    //SERVER
+    app.listen(port, () => {
+      console.log("Server listening on port", port);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//4 - Connect to DB, if success, start the server
+connectToDb(url)
+  .then(() => console.log("Connected to DB"))
+  .then(() => startServer())
+  .catch(() => console.log("Connection to DB failed"));
