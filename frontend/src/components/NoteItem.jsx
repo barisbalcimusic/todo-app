@@ -1,13 +1,11 @@
 import { useState } from "react";
 import DeleteNote from "./DeleteNote";
 import UpdateNote from "./UpdateNote";
-import { useNotesContext } from "../contexts/NotesContext";
 
-const NoteItem = ({ id, title, content }) => {
-  const [titleValue, setTitleValue] = useState(title);
-  const [contentValue, setContentValue] = useState(content);
+const NoteItem = ({ id, title, content, setNotes }) => {
+  const [newTitle, setNewTitle] = useState(title);
+  const [newContent, setNewContent] = useState(content);
   const [editMode, setEditMode] = useState(false);
-  const { setNotes } = useNotesContext();
 
   const fetchData = async () => {
     try {
@@ -17,9 +15,8 @@ const NoteItem = ({ id, title, content }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: id,
-          title: titleValue,
-          content: contentValue,
+          title: newTitle,
+          content: newContent,
         }),
       });
       const data = await res.json();
@@ -42,8 +39,8 @@ const NoteItem = ({ id, title, content }) => {
         onSubmit={handleSubmit}
       >
         <input
-          value={titleValue}
-          onChange={(e) => setTitleValue(e.target.value)}
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
           className={`w-full text-xl p-1 font-bold ${
             editMode ? "bg-white" : "bg-sky-200"
           }`}
@@ -52,8 +49,8 @@ const NoteItem = ({ id, title, content }) => {
           maxLength="30"
         />
         <input
-          value={contentValue}
-          onChange={(e) => setContentValue(e.target.value)}
+          value={newContent}
+          onChange={(e) => setNewContent(e.target.value)}
           className={`w-full p-1 bg-purple-200 ${
             editMode ? "bg-white" : "bg-sky-200"
           }`}
