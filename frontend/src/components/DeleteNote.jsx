@@ -3,20 +3,18 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNotesContext } from "../contexts/NotesContext";
 
 const DeleteNote = ({ id }) => {
-  const { setNotes } = useNotesContext();
+  const { notes, setNotes } = useNotesContext();
 
   const handleDelete = (e) => {
     e.preventDefault();
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `https://betterdo.onrender.com/api/notes/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+          method: "DELETE",
+        });
         const data = await res.json();
-        setNotes(data.reverse());
+        const newList = notes.filter((note) => note._id !== data._id);
+        setNotes(newList);
       } catch (error) {
         console.log(error);
       }

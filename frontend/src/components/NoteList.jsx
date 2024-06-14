@@ -7,8 +7,8 @@ const NoteList = () => {
     <ul className="w-4/12 min-w-[350px] flex flex-col gap-5">
       {notes.map((note) => (
         <NoteItem
-          key={note.id}
-          id={note.id}
+          key={note._id}
+          id={note._id}
           title={note.title}
           content={note.content}
           setNotes={setNotes}

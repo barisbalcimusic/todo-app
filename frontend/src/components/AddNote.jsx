@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AddNote = () => {
-  const { setNotes } = useNotesContext();
+  const { notes, setNotes } = useNotesContext();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -13,23 +13,24 @@ const AddNote = () => {
     if (submitted) {
       const fetchData = async () => {
         try {
-          const res = await fetch("https://betterdo.onrender.com/api/notes", {
+          const res = await fetch("http://localhost:3000/api/notes", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              id: new Date().getTime(),
               title: title,
               content: content,
             }),
           });
           const data = await res.json();
-          setNotes(data.reverse());
+          setNotes(notes ? (notes) => [...notes, data] : data);
         } catch (error) {
           console.log(error);
         }
         setSubmitted(false);
+        setTitle("");
+        setContent("");
       };
       fetchData();
     }
@@ -53,6 +54,7 @@ const AddNote = () => {
           placeholder="title"
           className="w-full p-2"
           maxLength="30"
+          required
         />
         <input
           onChange={(e) => setContent(e.target.value)}
@@ -61,6 +63,7 @@ const AddNote = () => {
           placeholder="note"
           className="w-full p-2"
           maxLength="30"
+          required
         />
       </div>
       <button
