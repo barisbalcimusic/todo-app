@@ -7,19 +7,15 @@ const UpdateNote = ({ editMode, setEditMode }) => {
     setEditMode(true);
   };
 
-  return !editMode ? (
+  return (
     <button
-      className="bg-purple-300 w-8 h-8 font-bold hover:bg-red-200"
-      onClick={handleClick}
+      className={`${
+        editMode ? "bg-green-300" : "bg-purple-300"
+      } w-8 h-8 font-bold hover:bg-red-200`}
+      onClick={editMode ? null : handleClick}
+      type={editMode ? null : "submit"}
     >
-      <FontAwesomeIcon icon={faPenToSquare} />
-    </button>
-  ) : (
-    <button
-      className="bg-green-300 w-8 h-8 font-bold hover:bg-red-200"
-      type="submit"
-    >
-      <FontAwesomeIcon icon={faFloppyDisk} />
+      <FontAwesomeIcon icon={editMode ? faFloppyDisk : faPenToSquare} />
     </button>
   );
 };
