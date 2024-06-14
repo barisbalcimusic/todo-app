@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: "Rubik Bubbles", system-ui;
 }
