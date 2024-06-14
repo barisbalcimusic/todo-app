@@ -1,6 +1,6 @@
 export const postData = async (title, content) => {
   try {
-    const res = await fetch("http://localhost:3000/api/notes", {
+    const res = await fetch("https://betterdo.onrender.com/api/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

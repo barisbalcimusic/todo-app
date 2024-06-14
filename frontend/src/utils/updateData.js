@@ -1,6 +1,6 @@
 export const updateData = async (id, newTitle, newContent) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+    const res = await fetch(`https://betterdo.onrender.com/api/notes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
