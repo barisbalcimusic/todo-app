@@ -1,24 +1,16 @@
 import "./index.css";
+import { ClipLoader } from "react-spinners";
 import { useEffect } from "react";
+import { useNotesContext } from "./contexts/NotesContext";
+import { getData } from "./utils/getData.js";
 import NoteList from "./components/NoteList";
 import AddNote from "./components/AddNote";
-import { useNotesContext } from "./contexts/NotesContext";
-import { ClipLoader } from "react-spinners";
 
 const App = () => {
   const { notes, setNotes } = useNotesContext(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/notes");
-        const data = await res.json();
-        setNotes(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    getData().then((data) => setNotes(data));
   }, []);
 
   return (

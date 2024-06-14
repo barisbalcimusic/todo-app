@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNotesContext } from "../contexts/NotesContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { postData } from "../utils/postData";
 
 const AddNote = () => {
   const { notes, setNotes } = useNotesContext();
@@ -11,28 +12,12 @@ const AddNote = () => {
 
   useEffect(() => {
     if (submitted) {
-      const fetchData = async () => {
-        try {
-          const res = await fetch("http://localhost:3000/api/notes", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title: title,
-              content: content,
-            }),
-          });
-          const data = await res.json();
-          setNotes(notes ? (notes) => [...notes, data] : data);
-        } catch (error) {
-          console.log(error);
-        }
+      postData(title, content).then((data) => {
+        setNotes(notes ? (notes) => [...notes, data] : data);
         setSubmitted(false);
         setTitle("");
         setContent("");
-      };
-      fetchData();
+      });
     }
   }, [submitted]);
 

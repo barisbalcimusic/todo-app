@@ -1,35 +1,20 @@
 import { useState } from "react";
 import DeleteNote from "./DeleteNote";
 import UpdateNote from "./UpdateNote";
+import { updateData } from "../utils/updateData";
 
-const NoteItem = ({ id, title, content, setNotes }) => {
+const NoteItem = ({ id, title, content, notes }) => {
   const [newTitle, setNewTitle] = useState(title);
   const [newContent, setNewContent] = useState(content);
   const [editMode, setEditMode] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: newTitle,
-          content: newContent,
-        }),
-      });
-      const data = await res.json();
-      setNotes(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEditMode(false);
-    fetchData();
+    updateData(id, newTitle, newContent).then((data) => {
+      let note = notes.find((note) => note._id === id);
+      note = { title: data.title, content: data.content };
+      setEditMode(false);
+    });
   };
 
   return (

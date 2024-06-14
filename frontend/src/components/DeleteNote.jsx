@@ -1,25 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNotesContext } from "../contexts/NotesContext";
+import { deleteData } from "../utils/deleteData";
 
 const DeleteNote = ({ id }) => {
   const { notes, setNotes } = useNotesContext();
 
   const handleDelete = (e) => {
     e.preventDefault();
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
-          method: "DELETE",
-        });
-        const data = await res.json();
-        const newList = notes.filter((note) => note._id !== data._id);
-        setNotes(newList);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    deleteData(id).then((data) => {
+      const newList = notes.filter((note) => note._id !== data._id);
+      setNotes(newList);
+    });
   };
 
   return (
