@@ -18,7 +18,7 @@ const url = process.env.DB_URL;
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://betterdo.onrender.com/",
+  "https://betterdo.netlify.app/",
 ];
 app.use(
   cors({
