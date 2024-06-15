@@ -17,7 +17,8 @@ const url = process.env.DB_URL;
 //CORS ip settings
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://betterdo.onrender.com/api/notes",
+  "http://localhost:5174",
+  "https://betterdo.onrender.com/",
 ];
 app.use(
   cors({
