@@ -12,10 +12,10 @@ This project is a full-stack web application developed using the MERN (MongoDB, 
 ## Technologies Used
 
 - **React.js**
+- **Tailwind CSS**
 - **Node.js (Express.js)**
 - **MongoDB**
 - **Mongoose**
-- **Tailwind CSS**
 
 ## Project Structure
 
