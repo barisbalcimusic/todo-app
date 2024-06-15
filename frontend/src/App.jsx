@@ -22,9 +22,9 @@ const App = () => {
       {notes ? (
         <NoteList />
       ) : (
-        <div>
-          <ClipLoader color="green" size={80} />
-          <p className="text-xl">Loading...</p>
+        <div className="flex flex-col items-center justify-center gap-3">
+          <ClipLoader color="black" size={50} />
+          <p className="text-l">loading</p>
         </div>
       )}
     </div>

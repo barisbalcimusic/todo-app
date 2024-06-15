@@ -5,15 +5,16 @@ const NoteList = () => {
   const { notes } = useNotesContext();
   return (
     <ul className="w-4/12 min-w-[350px] flex flex-col gap-5">
-      {notes.map((note) => (
-        <NoteItem
-          key={note._id}
-          id={note._id}
-          title={note.title}
-          content={note.content}
-          notes={notes}
-        />
-      ))}
+      {notes &&
+        notes.map((note) => (
+          <NoteItem
+            key={note._id}
+            id={note._id}
+            title={note.title}
+            content={note.content}
+            notes={notes}
+          />
+        ))}
     </ul>
   );
 };
