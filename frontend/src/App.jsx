@@ -7,7 +7,7 @@ import NoteList from "./components/NoteList";
 import AddNote from "./components/AddNote";
 
 const App = () => {
-  const { notes, setNotes } = useNotesContext(null);
+  const { notes, setNotes } = useNotesContext();
 
   useEffect(() => {
     getData().then((data) => setNotes(data));
