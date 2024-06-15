@@ -12,12 +12,14 @@ const AddNote = () => {
 
   useEffect(() => {
     if (submitted) {
-      postData(title, content).then((data) => {
-        setNotes(notes ? (notes) => [...notes, data] : data);
-        setSubmitted(false);
-        setTitle("");
-        setContent("");
-      });
+      postData(title, content)
+        .then((data) => {
+          setNotes(notes ? (notes) => [...notes, data] : data);
+          setSubmitted(false);
+          setTitle("");
+          setContent("");
+        })
+        .catch((e) => console.log(e));
     }
   }, [submitted]);
 
