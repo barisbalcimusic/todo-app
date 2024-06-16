@@ -24,6 +24,9 @@ export const updateNote = async (req, res, next) => {
       runValidators: true,
       new: true,
     });
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
     res.status(200).json(note);
   } catch (e) {
     next(e);
@@ -32,7 +35,10 @@ export const updateNote = async (req, res, next) => {
 
 export const deleteNote = async (req, res, next) => {
   try {
-    const note = await Notes.findByIdAndDelete(req.params.id, req.body);
+    const note = await Notes.findByIdAndDelete(req.params.id);
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
     res.status(200).json(note);
   } catch (e) {
     next(e);
