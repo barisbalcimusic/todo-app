@@ -13,8 +13,7 @@ const UpdateNote = ({ editMode, setEditMode }) => {
         editMode ? "bg-green-300" : "bg-purple-300"
       } w-8 h-8 font-bold hover:bg-red-200`}
       onClick={editMode ? null : handleClick}
-      type={editMode ? null : "submit"}
-    >
+      type={editMode ? null : "submit"}>
       <FontAwesomeIcon icon={editMode ? faFloppyDisk : faPenToSquare} />
     </button>
   );

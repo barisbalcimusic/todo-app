@@ -10,19 +10,20 @@ const NoteItem = ({ id, title, content, notes }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateData(id, newTitle, newContent).then((data) => {
-      let note = notes.find((note) => note._id === id);
-      note = { title: data.title, content: data.content };
-      setEditMode(false);
-    });
+    updateData(id, newTitle, newContent)
+      .then((data) => {
+        let note = notes.find((note) => note._id === id);
+        note = { title: data.title, content: data.content };
+        setEditMode(false);
+      })
+      .catch((e) => console.error(e));
   };
 
   return (
     <li className="w-full flex justify-center rounded-xl px-10 py-5  shadow-lg bg-blue-100">
       <form
         className="w-9/12 min-w-[270px] flex flex-col gap-2"
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         <input
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}

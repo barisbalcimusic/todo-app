@@ -45,7 +45,7 @@ To run this project locally, follow these steps:
    - Create a `.env` file and add the following environment variables:
      ```dotenv
      PORT=3000
-     MONGODB_URI=<your_mongodb_connection_string>
+     DB_URL=<your_mongodb_connection_string>
      ```
      Replace `<your_mongodb_connection_string>` with your MongoDB connection string.
    - Start the backend server:

@@ -10,9 +10,10 @@ export const updateData = async (id, newTitle, newContent) => {
         content: newContent,
       }),
     });
+    if (!res.ok) throw new Error("Fetch failed (updateData)");
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

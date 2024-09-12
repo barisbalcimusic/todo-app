@@ -10,19 +10,9 @@ const App = () => {
   const { notes, setNotes } = useNotesContext();
 
   useEffect(() => {
-    // getData()
-    //   .then((data) => setNotes(data))
-    //   .catch((error) => console.log("Fetch failed: ", error));
-    const fetchData = async () => {
-      try {
-        const data = await getData();
-        setNotes(data);
-      } catch (error) {
-        console.log("Fetch failed: ", error);
-      }
-    };
-
-    fetchData();
+    getData()
+      .then((data) => setNotes(data))
+      .catch((e) => console.error(e));
   }, []);
 
   return (

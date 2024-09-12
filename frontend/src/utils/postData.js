@@ -10,9 +10,10 @@ export const postData = async (title, content) => {
         content: content,
       }),
     });
+    if (!res.ok) throw new Error("Fetch failed (postData)");
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

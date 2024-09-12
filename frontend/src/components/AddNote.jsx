@@ -19,7 +19,7 @@ const AddNote = () => {
           setTitle("");
           setContent("");
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
     }
   }, [submitted]);
 
@@ -31,8 +31,7 @@ const AddNote = () => {
   return (
     <form
       className="w-4/12 min-w-[350px] flex flex-col items-center space-y-2 px-10 py-5 rounded-xl shadow-lg bg-blue-200"
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <div className="w-9/12 min-w-[270px] flex-1 flex-col items-center space-y-2">
         <input
           onChange={(e) => setTitle(e.target.value)}
@@ -55,8 +54,7 @@ const AddNote = () => {
       </div>
       <button
         className="w-9/12 min-w-[270px]  bg-purple-300 p-2 hover:bg-red-200 font-bold"
-        type="submit"
-      >
+        type="submit">
         <FontAwesomeIcon icon={faPlus} />
       </button>
     </form>
