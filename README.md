@@ -1,5 +1,7 @@
 # First Full-Stack Mini-Project with MERN Stack (June 2024)
 
+### [https://betterdo.netlify.app](https://betterdo.netlify.app/)
+
 This project is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It allows users to manage their to-do lists by performing basic CRUD (Create, Read, Update, Delete) operations on notes.
 
 ## Features
@@ -71,3 +73,7 @@ To run this project locally, follow these steps:
 
 4. **Access the Application**:
    - Once both servers are running, open your web browser and visit [http://localhost:3000](http://localhost:3000).
+
+## Screenshots
+
+![Screenshot 2024-09-15 220347](https://github.com/user-attachments/assets/c73ab84d-3e2d-4eeb-a0ad-bf642ae02e01)
